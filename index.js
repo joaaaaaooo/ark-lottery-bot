@@ -32,28 +32,46 @@ const client = new Client({
 // 📊 stats
 const stats = new Map();
 
-// 🎲 RECOMPENSAS
+// 🎲 RECOMPENSAS (BALANCEADAS + VOIDWYRM)
 const rewards = [
-  { name: "Desmodus", chance: 0.5, rarity: "LEGENDARIO" },
-  { name: "Brontosaurus", chance: 1, rarity: "LEGENDARIO" },
-  { name: "Moneda de Oro", chance: 1.5, rarity: "ÉPICO" },
+  // 🌌 ULTRA LEGENDARIO
+  { name: "Voidwyrm", chance: 0.01, rarity: "🌌 ULTRA LEGENDARIO" },
 
-  { name: "Sabertooth", chance: 3, rarity: "RARO" },
-  { name: "Rifle Longneck", chance: 4, rarity: "RARO" },
+  // 🟣 PRIME
+  { name: "Desmodus", chance: 1.25, rarity: "PRIME" },
+  { name: "Brontosaurus", chance: 1.25, rarity: "PRIME" },
+  { name: "Gasbags", chance: 1.25, rarity: "PRIME" },
+  { name: "Procoptodon", chance: 1.25, rarity: "PRIME" },
+
+  // 🔴 ÉPICO
+  { name: "Moneda de Oro", chance: 3.33, rarity: "ÉPICO" },
+  { name: "Deinonychus", chance: 3.33, rarity: "ÉPICO" },
+  { name: "Fjordhawk", chance: 3.34, rarity: "ÉPICO" },
+
+  // 🟠 RARO
+  { name: "Sabertooth", chance: 5, rarity: "RARO" },
+  { name: "Rifle Longneck", chance: 5, rarity: "RARO" },
   { name: "Gigantopithecus", chance: 5, rarity: "RARO" },
+  { name: "Castoroides", chance: 2.5, rarity: "RARO" },
+  { name: "Equus", chance: 2.5, rarity: "RARO" },
 
-  { name: "Otter", chance: 6, rarity: "POCO COMÚN" },
-  { name: "Shinehorn", chance: 6, rarity: "POCO COMÚN" },
-  { name: "Iguanodon", chance: 7, rarity: "POCO COMÚN" },
+  // 🟡 COMÚN
+  { name: "Otter", chance: 8, rarity: "COMÚN" },
+  { name: "Shinehorn", chance: 8, rarity: "COMÚN" },
+  { name: "Iguanodon", chance: 8, rarity: "COMÚN" },
+  { name: "Cryopods x10", chance: 8, rarity: "COMÚN" },
+  { name: "Raptor", chance: 7.99, rarity: "COMÚN" },
 
-  { name: "Cryopods x10", chance: 10, rarity: "COMÚN" },
-  { name: "Raptor", chance: 12, rarity: "COMÚN" },
-  { name: "Parasaurus", chance: 15, rarity: "COMÚN" },
+  // 🧰 BÁSICO
+  { name: "Kit Inicio", chance: 7.5, rarity: "BÁSICO" },
+  { name: "Moneda de Plata", chance: 7.5, rarity: "BÁSICO" },
 
-  { name: "Kit Inicio", chance: 18, rarity: "BÁSICO" },
-  { name: "Moneda de Plata", chance: 11, rarity: "BÁSICO" }
+  // ⚫ BASURILLA
+  { name: "Dodo", chance: 5, rarity: "BASURILLA" },
+  { name: "Jerboa", chance: 5, rarity: "BASURILLA" }
 ];
 
+// 🎲 RUEDA
 function roll() {
   let total = rewards.reduce((a, b) => a + b.chance, 0);
   let r = Math.random() * total;
