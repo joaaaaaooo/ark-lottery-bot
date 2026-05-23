@@ -1,5 +1,16 @@
 require('dotenv').config();
 
+const express = require('express');
+const app = express();
+
+app.get('/', (req, res) => {
+  res.send('Bot ARK activo ✅');
+});
+
+app.listen(3000, () => {
+  console.log('🌐 Web activa en puerto 3000');
+});
+
 const {
   Client,
   GatewayIntentBits,
@@ -55,7 +66,6 @@ function roll() {
 
 // ⏳ COOLDOWN 3 DÍAS
 const cooldown = new Map();
-
 const COOLDOWN_TIME = 3 * 24 * 60 * 60 * 1000;
 
 // 🧾 comandos
@@ -86,7 +96,7 @@ const rest = new REST({ version: '10' }).setToken(process.env.TOKEN);
   }
 })();
 
-// 🤖 interacción
+// 🤖 INTERACCIONES
 client.on('interactionCreate', async interaction => {
 
   if (!interaction.isChatInputCommand()) return;
@@ -111,7 +121,6 @@ client.on('interactionCreate', async interaction => {
     }
 
     cooldown.set(userId, now);
-
     await handleSpin(interaction);
   }
 
@@ -132,7 +141,7 @@ client.on('interactionCreate', async interaction => {
   }
 });
 
-// 🎰 lógica principal
+// 🎰 SISTEMA PRINCIPAL
 async function handleSpin(interaction) {
 
   await interaction.deferReply();
@@ -163,6 +172,7 @@ async function handleSpin(interaction) {
       name: `ticket-ruleta-${cleanName}`,
       type: ChannelType.GuildText,
       parent: process.env.TICKET_CATEGORY_ID || null,
+
       permissionOverwrites: [
         {
           id: interaction.guild.id,
@@ -177,7 +187,7 @@ async function handleSpin(interaction) {
           ],
         },
         {
-          id: "1507581382476562482",
+          id: process.env.STAFF_ROLE_ID,
           allow: [
             PermissionsBitField.Flags.ViewChannel,
             PermissionsBitField.Flags.SendMessages,
@@ -215,7 +225,7 @@ async function handleSpin(interaction) {
   }
 }
 
-// 🔘 botones
+// 🔘 BOTONES
 client.on('interactionCreate', async interaction => {
 
   if (!interaction.isButton()) return;
